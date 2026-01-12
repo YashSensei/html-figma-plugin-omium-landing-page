@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing - Omium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "charcoal": "#0a0a0a",
+                    "copper": "#DE924F",
+                    "copper-muted": "rgba(222, 146, 79, 0.2)",
+                    "panel": "#121212",
+                    "hairline": "rgba(255,255,255,0.06)",
+                },
+                fontFamily: {
+                    "display": ["Space Grotesk", "sans-serif"],
+                    "serif": ["Playfair Display", "serif"],
+                    "mono": ["Space Mono", "monospace"]
+                }
+            },
+        },
+    }
+</script>
+<style type="text/tailwindcss">
+    @layer base {
+        body {
+            @apply bg-charcoal text-white font-display antialiased selection:bg-copper selection:text-black;
+        }
+    }
+    .pricing-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 40%);
+        border: 1px solid rgba(255,255,255,0.04);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .pricing-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255,255,255,0.08);
+    }
+    .pricing-card-pro {
+        background: linear-gradient(180deg, rgba(222,146,79,0.06) 0%, transparent 40%);
+        border: 1px solid rgba(222,146,79,0.15);
+    }
+    .pricing-card-pro:hover {
+        transform: translateY(-4px);
+        border-color: rgba(222,146,79,0.25);
+    }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Nav -->
+<nav class="fixed top-0 w-full h-20 border-b border-hairline bg-charcoal/80 backdrop-blur-xl z-50 flex items-center justify-between px-12">
+    <div class="flex items-center gap-12">
+        <a href="omium-landing-page.html" class="flex items-center gap-2">
+            <div class="size-5 bg-copper"></div>
+            <span class="text-lg font-[600] tracking-tighter uppercase">Omium<span class="text-copper">.</span></span>
+        </a>
+        <div class="hidden md:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-[500] text-white/60">
+            <a class="hover:text-copper transition-colors" href="#">Book Demo</a>
+            <a class="text-white" href="#">Pricing</a>
+            <a class="hover:text-copper transition-colors" href="#">Docs</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-6">
+        <a href="omium-auth.html" class="text-[11px] uppercase tracking-[0.15em] font-[500] text-white/60 hover:text-white transition-colors">Login</a>
+        <button class="px-6 py-2.5 bg-copper text-black text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all rounded-lg">Start Free</button>
+    </div>
+</nav>
+
+<!-- Section 1: Pricing -->
+<section class="px-12 pt-40 pb-32">
+    <div class="max-w-5xl mx-auto w-full">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">What's your uptime worth?</h1>
+            <p class="text-white/40 text-lg">Start free. Scale when ready.</p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <!-- Free Tier -->
+            <div class="pricing-card rounded-xl p-6 flex flex-col">
+                <div class="mb-5">
+                    <h3 class="text-xs font-[500] text-white/40 uppercase tracking-widest mb-3">Free</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-3xl font-[600]">$0</span>
+                        <span class="text-white/30 text-sm">/month</span>
+                    </div>
+                </div>
+
+                <button class="w-full py-2.5 border border-white/[0.08] text-white/70 text-[10px] font-[500] uppercase tracking-widest rounded-lg hover:border-white/20 transition-all mb-6">
+                    Get Started
+                </button>
+
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span><span class="text-white/80">500 agent runs</span> / month</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Core observability</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>7-day data retention</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>1 seat</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Developer Tier -->
+            <div class="pricing-card rounded-xl p-6 flex flex-col">
+                <div class="mb-5">
+                    <h3 class="text-xs font-[500] text-white/40 uppercase tracking-widest mb-3">Developer</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-3xl font-[600]">$39</span>
+                        <span class="text-white/30 text-sm">/month</span>
+                    </div>
+                </div>
+
+                <button class="w-full py-2.5 border border-white/[0.08] text-white/70 text-[10px] font-[500] uppercase tracking-widest rounded-lg hover:border-white/20 transition-all mb-6">
+                    7d Free Trial
+                </button>
+
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span><span class="text-white/80">2,500 agent runs</span> / month</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Core observability</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Search + filters</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>User feedback</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Local-first mode</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>14-day data retention</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>1 seat</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Pro Tier -->
+            <div class="pricing-card-pro rounded-xl p-6 flex flex-col relative">
+                <div class="absolute -top-3 left-6 px-3 py-1 bg-copper text-black text-[9px] font-[600] uppercase tracking-wider rounded">
+                    Popular
+                </div>
+
+                <div class="mb-5">
+                    <h3 class="text-xs font-[500] text-copper uppercase tracking-widest mb-3">Pro</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-3xl font-[600]">$299</span>
+                        <span class="text-white/30 text-sm">/month</span>
+                    </div>
+                </div>
+
+                <button class="w-full py-2.5 bg-copper text-black text-[10px] font-[600] uppercase tracking-widest rounded-lg hover:bg-white transition-all mb-6">
+                    Get Started
+                </button>
+
+                <p class="text-[11px] text-white/40 mb-4">Everything in Developer, plus:</p>
+
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span><span class="text-white/90">25,000 agent runs</span> / month</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Silent failure detection</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Topic Clustering</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>60-day data retention</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Up to 5 seats</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/70">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Slack support</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Enterprise Tier -->
+            <div class="pricing-card rounded-xl p-6 flex flex-col">
+                <div class="mb-5">
+                    <h3 class="text-xs font-[500] text-white/40 uppercase tracking-widest mb-3">Enterprise</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-3xl font-[600]">Custom</span>
+                    </div>
+                </div>
+
+                <button class="w-full py-2.5 border border-white/[0.08] text-white/70 text-[10px] font-[500] uppercase tracking-widest rounded-lg hover:border-white/20 transition-all mb-6">
+                    Contact Sales
+                </button>
+
+                <p class="text-[11px] text-white/40 mb-4">Everything in Pro, plus:</p>
+
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Unlimited seats</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Custom rate limits</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Custom data retention</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>SSO login</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>SLA guarantees</span>
+                    </li>
+                    <li class="flex items-start gap-2.5 text-[12px] text-white/60">
+                        <span class="text-copper text-xs mt-0.5">✓</span>
+                        <span>Prioritized support</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Comparison -->
+<section class="px-12 py-32 border-t border-hairline">
+    <div class="max-w-5xl mx-auto w-full">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-[600] tracking-tight text-white/90">Feature breakdown</h2>
+        </div>
+
+        <!-- Table -->
+        <div class="border border-white/[0.04] rounded-lg overflow-hidden">
+            <!-- Header -->
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/30 font-[500]">Features</div>
+                <div class="p-4 text-[13px] text-white/40 text-center">Free</div>
+                <div class="p-4 text-[13px] text-copper text-center font-[500]">Pro</div>
+                <div class="p-4 text-[13px] text-white/40 text-center">Enterprise</div>
+            </div>
+
+            <!-- Rows -->
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">Executions</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">10k/mo</div>
+                <div class="p-4 text-[13px] text-white/60 text-center">100k/mo</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">Unlimited</div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">Trace Retention</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">7 days</div>
+                <div class="p-4 text-[13px] text-white/60 text-center">30 days</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">Custom</div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">AI Fix Suggestions</div>
+                <div class="p-4 text-center"><span class="text-white/15">—</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">Auto-Apply Fixes</div>
+                <div class="p-4 text-center"><span class="text-white/15">—</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">Team Members</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">1</div>
+                <div class="p-4 text-[13px] text-white/60 text-center">10</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">Unlimited</div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-white/[0.04]">
+                <div class="p-4 text-[13px] text-white/50">Webhooks & Alerts</div>
+                <div class="p-4 text-center"><span class="text-white/15">—</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+                <div class="p-4 text-center"><span class="text-copper text-xs">✓</span></div>
+            </div>
+
+            <div class="grid grid-cols-[1.5fr_1fr_1fr_1fr]">
+                <div class="p-4 text-[13px] text-white/50">Support</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">Community</div>
+                <div class="p-4 text-[13px] text-white/60 text-center">Priority</div>
+                <div class="p-4 text-[13px] text-white/30 text-center">Dedicated</div>
+            </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="mt-16 flex items-center justify-between gap-6 py-6 border-t border-white/[0.04]">
+            <p class="text-white/40 text-sm">Need help choosing the right plan?</p>
+            <button class="px-6 py-2.5 border border-white/[0.08] text-white/70 text-[10px] font-[500] uppercase tracking-widest rounded-lg hover:border-white/20 transition-all">
+                Contact Support
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 px-12 border-t border-white/[0.04] flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="flex items-center gap-10">
+        <div class="flex items-center gap-2">
+            <div class="size-3.5 bg-copper"></div>
+            <span class="text-sm font-[600] tracking-tighter uppercase">Omium.</span>
+        </div>
+        <div class="flex gap-6 text-[10px] uppercase tracking-widest text-white/25">
+            <a class="hover:text-white/50 transition-colors" href="#">Docs</a>
+            <a class="hover:text-white/50 transition-colors" href="#">Privacy</a>
+            <a class="hover:text-white/50 transition-colors" href="#">Terms</a>
+        </div>
+    </div>
+    <div class="text-[10px] uppercase tracking-widest text-white/20">
+        © 2025 Omium
+    </div>
+</footer>
+
+</body>
+</html>
