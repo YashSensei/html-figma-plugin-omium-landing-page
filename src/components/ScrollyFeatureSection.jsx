@@ -43,7 +43,7 @@ function TerminalDepiction({ isActive }) {
 // Depiction component for Step 2 - Detect/Suggest/Fix flow
 function DetectFixDepiction({ isActive }) {
   return (
-    <div className={`glass-card copper-glow p-6 flex flex-col hover-scale transition-all duration-500 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+    <div className={`glass-card copper-glow p-6 flex flex-col transition-all duration-500 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
@@ -110,7 +110,7 @@ function DetectFixDepiction({ isActive }) {
 // Depiction component for Step 3 - Resume comparison
 function ResumeDepiction({ isActive }) {
   return (
-    <div className={`glass-card relative overflow-hidden bg-[#0a0a0a] border border-white/10 shadow-xl shadow-black/20 hover-scale transition-all duration-500 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+    <div className={`glass-card relative overflow-hidden bg-[#0a0a0a] border border-white/10 shadow-xl shadow-black/20 transition-all duration-500 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
       <div className="grid grid-cols-2 gap-0 relative">
         <div className="p-6 flex flex-col bg-transparent border-r border-white/10">
           <div className="flex items-center gap-2 mb-6">
@@ -231,7 +231,7 @@ export default function ScrollyFeatureSection() {
     >
       {/* Sticky viewport */}
       <div
-        className="h-screen flex items-center px-12 border-b border-hairline bg-charcoal z-10 left-0 right-0"
+        className="h-screen flex items-center px-12 bg-charcoal z-10 left-0 right-0"
         style={getPositionStyle()}
       >
         <div className="max-w-7xl mx-auto grid grid-cols-12 gap-16 items-center w-full">

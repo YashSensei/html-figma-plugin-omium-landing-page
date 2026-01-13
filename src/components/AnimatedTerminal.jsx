@@ -83,7 +83,7 @@ export default function AnimatedTerminal({ isVisible, delay = 500 }) {
   const currentLine = terminalLines[currentLineIndex];
 
   return (
-    <div className="glass-card copper-glow p-1 aspect-video relative overflow-hidden group hover-scale">
+    <div className="glass-card copper-glow p-1 aspect-video relative overflow-hidden group">
       <div className="absolute inset-0 bg-[#080808] p-6 flex flex-col font-mono text-[11px]">
         <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
           <div className="flex items-center gap-2">

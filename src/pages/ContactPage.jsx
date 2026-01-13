@@ -97,8 +97,8 @@ export default function ContactPage() {
               {/* Contact info */}
               <div className="mt-12 pt-8 border-t border-hairline">
                 <p className="text-white/40 text-sm mb-4">Prefer email?</p>
-                <a href="mailto:hello@omium.ai" className="text-copper hover:text-white transition-colors">
-                  hello@omium.ai
+                <a href="mailto:founders@omium.ai" className="text-copper hover:text-white transition-colors">
+                  founders@omium.ai
                 </a>
               </div>
             </div>

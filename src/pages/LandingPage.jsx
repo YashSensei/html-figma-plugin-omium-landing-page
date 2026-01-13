@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import ScrollyFeatureSection from '../components/ScrollyFeatureSection';
@@ -11,7 +11,7 @@ import { LampContainer } from '../components/LampEffect';
 const ParallaxFeatureCard = ({ type, translate }) => {
   const cards = {
     install: (
-      <div className="glass-card-simple p-6 h-full">
+      <div className="glass-card-static p-6 h-full">
         <div className="flex items-center justify-between mb-4">
           <div className="size-10 rounded-full border border-copper/30 bg-charcoal flex items-center justify-center text-copper font-mono text-sm font-bold">01</div>
           <span className="text-[8px] uppercase tracking-widest text-white/30">Install</span>
@@ -23,7 +23,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     wrap: (
-      <div className="glass-card-simple p-6 h-full">
+      <div className="glass-card-static p-6 h-full">
         <div className="flex items-center justify-between mb-4">
           <div className="size-10 rounded-full border border-copper/30 bg-charcoal flex items-center justify-center text-copper font-mono text-sm font-bold">02</div>
           <span className="text-[8px] uppercase tracking-widest text-white/30">Wrap</span>
@@ -36,7 +36,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     ship: (
-      <div className="glass-card-simple p-6 h-full border-copper/20">
+      <div className="glass-card-static p-6 h-full border-copper/20">
         <div className="flex items-center justify-between mb-4">
           <div className="size-10 rounded-full border-2 border-copper bg-copper/10 flex items-center justify-center text-copper font-mono text-sm font-bold">03</div>
           <span className="text-[8px] uppercase tracking-widest text-copper/60">Active</span>
@@ -51,7 +51,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     analytics: (
-      <div className="glass-card-simple p-6 h-full">
+      <div className="glass-card-static p-6 h-full">
         <div className="flex items-center gap-2 mb-3">
           <div className="size-6 rounded bg-copper/20 flex items-center justify-center">
             <span className="text-copper text-xs">📊</span>
@@ -71,7 +71,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     pie: (
-      <div className="glass-card-simple p-6 h-full">
+      <div className="glass-card-static p-6 h-full">
         <div className="flex items-center gap-2 mb-3">
           <div className="size-6 rounded bg-copper/20 flex items-center justify-center">
             <span className="text-copper text-xs">📈</span>
@@ -96,7 +96,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     trace: (
-      <div className="glass-card-simple p-6 h-full">
+      <div className="glass-card-static p-6 h-full">
         <div className="text-[10px] text-white/40 mb-2">Execution Trace</div>
         <div className="space-y-1.5 font-mono text-[9px]">
           <div className="flex items-center gap-2"><span className="size-1.5 rounded-full bg-green-500"></span><span className="text-white/50">agent.start()</span></div>
@@ -107,7 +107,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     error: (
-      <div className="glass-card-simple p-6 h-full border-red-500/20">
+      <div className="glass-card-static p-6 h-full border-red-500/20">
         <div className="text-[10px] text-red-400/60 mb-2">Error Detected</div>
         <div className="bg-red-500/5 border border-red-500/20 rounded p-2 font-mono text-[9px] text-red-400/80">
           <div>TimeoutError at line 42</div>
@@ -116,7 +116,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
       </div>
     ),
     checkpoint: (
-      <div className="glass-card-simple p-6 h-full border-copper/30">
+      <div className="glass-card-static p-6 h-full border-copper/30">
         <div className="text-[10px] text-copper/60 mb-2">Checkpoint Saved</div>
         <div className="bg-copper/5 border border-copper/20 rounded p-2 font-mono text-[9px]">
           <div className="text-copper/80">State: step_3_complete</div>
@@ -148,8 +148,7 @@ const ParallaxFeatureCard = ({ type, translate }) => {
   return (
     <motion.div
       style={{ x: translate }}
-      whileHover={{ y: -10, scale: 1.02 }}
-      className={`flex-shrink-0 transition-shadow hover:shadow-xl hover:shadow-copper/10 ${
+      className={`flex-shrink-0 ${
         isTerminal ? 'h-44 w-80' : 'h-40 w-64'
       }`}
     >
@@ -226,6 +225,37 @@ function TestimonialCard({ name, role, body, img }) {
   );
 }
 
+// FAQ Accordion Item
+function FAQItem({ question, answer }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border border-white/10 rounded-xl overflow-hidden bg-panel/30">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
+      >
+        <span className="text-base font-semibold text-white">{question}</span>
+        <span className={`text-white/40 text-xl transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>+</span>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-5 text-white/50 text-sm leading-relaxed">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function LandingPage() {
   const { isAuthenticated } = useAuth();
@@ -239,7 +269,8 @@ export default function LandingPage() {
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
-  // Parallax cards animations - adjusted for shorter section
+  // Parallax cards animations
+  // Cards come down normally, then fade out quickly after settling
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 0.6], [0, 500]),
     springConfig
@@ -252,9 +283,9 @@ export default function LandingPage() {
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
     springConfig
   );
-  // Cards fade in then fade out faster
+  // Cards fade in, stay visible while settling, then QUICKLY fade out (0.55 to 0.65)
   const cardsOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.15, 0.5, 0.7], [0.2, 1, 1, 0]),
+    useTransform(scrollYProgress, [0, 0.15, 0.55, 0.65], [0.2, 1, 1, 0]),
     springConfig
   );
   const rotateZ = useSpring(
@@ -266,9 +297,9 @@ export default function LandingPage() {
     springConfig
   );
 
-  // Hero header fades out as you scroll
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3, 0.55], [1, 1, 0]);
-  const heroY = useTransform(scrollYProgress, [0.3, 0.6], [0, -100]);
+  // Hero header fades out - stays longer, then quick fade
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.6], [1, 1, 1, 0]);
+  const heroY = useTransform(scrollYProgress, [0.5, 0.65], [0, -100]);
 
 
   // Scroll animation refs for each section
@@ -347,7 +378,7 @@ export default function LandingPage() {
       </section>
 
       {/* How it Works Section */}
-      <section ref={howItWorksRef} className="py-32 px-12 border-b border-hairline">
+      <section ref={howItWorksRef} className="py-32 px-12">
         <div className="max-w-7xl mx-auto">
           <div className={`text-center mb-16 transition-all duration-700 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Three lines. Full observability.</h2>
@@ -358,7 +389,7 @@ export default function LandingPage() {
             {/* Top Row - 3 Steps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               {/* Step 1 */}
-              <div className={`glass-card-simple p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.1s' }}>
+              <div className={`glass-card-static p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.1s' }}>
                 <div className="flex items-center justify-between mb-8">
                   <div className="size-12 rounded-full border border-copper/30 bg-charcoal flex items-center justify-center text-copper font-mono text-lg font-bold">01</div>
                   <span className="text-[9px] uppercase tracking-widest text-white/30">Install</span>
@@ -371,7 +402,7 @@ export default function LandingPage() {
               </div>
 
               {/* Step 2 */}
-              <div className={`glass-card-simple p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.2s' }}>
+              <div className={`glass-card-static p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.2s' }}>
                 <div className="flex items-center justify-between mb-8">
                   <div className="size-12 rounded-full border border-copper/30 bg-charcoal flex items-center justify-center text-copper font-mono text-lg font-bold">02</div>
                   <span className="text-[9px] uppercase tracking-widest text-white/30">Wrap</span>
@@ -385,7 +416,7 @@ export default function LandingPage() {
               </div>
 
               {/* Step 3 */}
-              <div className={`glass-card-simple p-8 relative border-copper/20 transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.3s' }}>
+              <div className={`glass-card-static p-8 relative border-copper/20 transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.3s' }}>
                 <div className="flex items-center justify-between mb-8">
                   <div className="size-12 rounded-full border-2 border-copper bg-copper/10 flex items-center justify-center text-copper font-mono text-lg font-bold">03</div>
                   <span className="text-[9px] uppercase tracking-widest text-copper/60">Active</span>
@@ -407,7 +438,7 @@ export default function LandingPage() {
             {/* Bottom Row - 2 Statistics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Usage Analytics Card */}
-              <div className={`glass-card-simple p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.4s' }}>
+              <div className={`glass-card-static p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.4s' }}>
                 {/* Mini dashboard preview */}
                 <div className="bg-[#0a0a0a] border border-white/5 rounded-lg p-5 mb-6">
                   <div className="flex items-center justify-between mb-4">
@@ -444,7 +475,7 @@ export default function LandingPage() {
               </div>
 
               {/* Failure Insights Card */}
-              <div className={`glass-card-simple p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.5s' }}>
+              <div className={`glass-card-static p-8 relative transition-all duration-500 ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '0.5s' }}>
                 {/* Pie chart / stats preview */}
                 <div className="bg-[#0a0a0a] border border-white/5 rounded-lg p-5 mb-6">
                   <div className="flex items-center justify-between mb-4">
@@ -508,7 +539,7 @@ export default function LandingPage() {
 
 
       {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="min-h-screen flex flex-col justify-center border-t border-hairline overflow-hidden py-16">
+      <section ref={testimonialsRef} className="min-h-screen flex flex-col justify-center overflow-hidden py-16">
         <div className={`text-center mb-6 transition-all duration-700 ${testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-crimson italic tracking-tight">
             What Our <span className="text-copper">Users</span> Say
@@ -552,52 +583,34 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section ref={faqRef} className="py-32 px-12 border-t border-hairline">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-12 gap-12">
-            <div className={`col-span-12 lg:col-span-4 flex flex-col justify-between transition-all duration-700 ${faqVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <div>
-                <div className="text-[10px] font-mono text-copper uppercase tracking-[0.4em] mb-4">[FAQs]</div>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">Read our<br/>FAQs</h2>
-              </div>
-              <div className="mt-12 lg:mt-0">
-                <p className="text-white/50 text-sm leading-relaxed mb-6">We're here to help with any questions about our plans, pricing, or features.</p>
-                <Link to="/contact" className="btn-hover px-8 py-3 bg-copper text-black text-[11px] font-bold uppercase tracking-widest rounded-full inline-block">Contact Support</Link>
-              </div>
-            </div>
+      <section ref={faqRef} className="py-32 px-12">
+        <div className="max-w-3xl mx-auto">
+          {/* Header */}
+          <div className={`text-center mb-12 transition-all duration-700 ${faqVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Frequently asked questions</h2>
+            <p className="text-white/50 text-base leading-relaxed">
+              Answers to common questions about Omium and its features. If you have any other questions, please don't hesitate to <Link to="/contact" className="text-copper hover:underline">contact us</Link>.
+            </p>
+          </div>
 
-            <div className={`col-span-12 lg:col-span-8 transition-all duration-700 delay-200 ${faqVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="border border-white/10 rounded-xl p-6 flex flex-col hover-lift hover:border-copper/30 transition-all">
-                  <span className="material-symbols-outlined text-copper text-2xl mb-6">sync</span>
-                  <h3 className="text-base font-bold mb-3">How long does integration take?</h3>
-                  <p className="text-white/40 text-sm leading-relaxed">
-                    Most teams integrate Omium in under 5 minutes. Install the SDK, wrap your agent, and you're done. No architecture changes required.
-                  </p>
-                </div>
-                <div className="border border-white/10 rounded-xl p-6 flex flex-col hover-lift hover:border-copper/30 transition-all">
-                  <span className="material-symbols-outlined text-copper text-2xl mb-6">build</span>
-                  <h3 className="text-base font-bold mb-3">Who is Omium designed for?</h3>
-                  <p className="text-white/40 text-sm leading-relaxed">
-                    Teams running AI agents in production. Whether you're using LangChain, OpenAI, or custom agents — if it can fail, Omium can help.
-                  </p>
-                </div>
-                <div className="border border-white/10 rounded-xl p-6 flex flex-col hover-lift hover:border-copper/30 transition-all">
-                  <span className="material-symbols-outlined text-copper text-2xl mb-6">database</span>
-                  <h3 className="text-base font-bold mb-3">How does Omium collect and process data?</h3>
-                  <p className="text-white/40 text-sm leading-relaxed">
-                    Omium captures execution traces, checkpoints, and metadata asynchronously. All data is encrypted. You control retention policies.
-                  </p>
-                </div>
-                <div className="border border-white/10 rounded-xl p-6 flex flex-col hover-lift hover:border-copper/30 transition-all">
-                  <span className="material-symbols-outlined text-copper text-2xl mb-6">shield</span>
-                  <h3 className="text-base font-bold mb-3">What happens if Omium goes down?</h3>
-                  <p className="text-white/40 text-sm leading-relaxed">
-                    Your agents keep running. Omium is a non-blocking observer. No single point of failure — your workflows continue normally.
-                  </p>
-                </div>
-              </div>
-            </div>
+          {/* FAQ Accordion */}
+          <div className={`space-y-3 transition-all duration-700 delay-200 ${faqVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <FAQItem
+              question="What is Omium?"
+              answer="Omium is an observability platform designed specifically for AI agents. It provides execution tracing, checkpointing, failure detection, and recovery capabilities to help you debug and monitor your AI workflows in production."
+            />
+            <FAQItem
+              question="How does it work?"
+              answer="Simply install our SDK and wrap your agent with a single line of code. Omium automatically captures execution traces, saves checkpoints, and monitors for failures. When something breaks, you can see exactly what happened and resume from the last checkpoint."
+            />
+            <FAQItem
+              question="Is my data secure?"
+              answer="Yes. All data is encrypted in transit and at rest. You control data retention policies, and we never share your data with third parties. Enterprise plans include additional security features like SSO and custom data handling."
+            />
+            <FAQItem
+              question="Can I use it for free?"
+              answer="Yes! Our free tier includes 500 agent executions per month, 7-day data retention, and core observability features. It's perfect for getting started and testing Omium with your projects."
+            />
           </div>
         </div>
       </section>
